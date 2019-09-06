@@ -1,0 +1,26 @@
+$colors: (
+  primary: violet,
+  secondary: lightgreen,
+  dark: #000,
+  danger: #e63946,
+  success: green
+);
+
+
+@function color($color, $opacity: 1) {
+  @if (map-has-key($colors, $color)) {
+    @return rgba(map-get($colors, $color), $opacity);
+  } @else {
+    @error unquote('Unfortunately, no value could be retrieved for `#{$color}`. ' + 'Please make sure it is defined in `$colors` map.');
+  }
+}
+
+@function tint($color, $percent: 18%) {
+  @return lighten($color, $percent);
+}
+
+@function shade($color, $percent: 18%) {
+  @return darken($color, $percent);
+}
+
+$color-fade: color(secondary, $opacity: 0.5);

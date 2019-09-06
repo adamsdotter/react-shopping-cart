@@ -1,0 +1,135 @@
+$font-size: size('base');
+
+html {
+  font-size: percentage($font-size / 16);
+  font-family: $font-primary;
+  line-height: calc-line-height($font-size);
+}
+
+input,
+select,
+button {
+  @include type-london;
+
+  font-family: $font-primary;
+}
+
+p,
+ul,
+ol,
+dl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  font-family: $font-primary;
+}
+
+p {
+  @include type-paris;
+}
+
+ul,
+ol,
+dl,
+p {
+  margin-bottom: rhythm('half');
+
+  @include mq('medium') {
+    margin-bottom: rhythm('small');
+  }
+}
+
+b,
+strong,
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-left: 0;
+}
+
+h1,
+.type-stockholm {
+  @include type-stockholm;
+
+  font-weight: 600;
+  margin-bottom: rhythm('small');
+
+  @include mq('medium') {
+    margin-bottom: rhythm();
+  }
+}
+
+h2,
+.type-madrid {
+  @include type-madrid;
+
+  font-weight: 600;
+  margin-bottom: rhythm('small');
+}
+
+h3,
+.type-berlin {
+  @include type-berlin;
+
+  font-weight: 600;
+  margin-bottom: rhythm('small');
+}
+
+h4,
+.type-london {
+  @include type-london;
+
+  font-weight: 600;
+  margin-bottom: rhythm('xsmall');
+}
+
+h5,
+h6,
+.type-oslo {
+  @include type-oslo;
+
+  font-weight: 600;
+  margin-bottom: rhythm('xsmall');
+}
+
+.type-paris {
+  @include type-paris;
+}
+
+caption,
+figcaption,
+.caption,
+.type-amsterdam {
+  @include type-amsterdam;
+}
+
+small,
+.type-rome {
+  @include type-rome;
+}
+
+ul,
+ol {
+  padding-left: rhythm();
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+}
+
+.sub-heading {
+  margin-bottom: 0;
+
+  @include mq('medium') {
+    margin-bottom: rhythm('xsmall');
+  }
+}
