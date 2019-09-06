@@ -1,0 +1,54 @@
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function rem($size) {
+  @return (strip-unit($size) / strip-unit($base-size)) * 1rem;
+}
+
+@function rem-to-px($size) {
+  @return (strip-unit($size) * strip-unit($base-size)) * 1px;
+}
+
+@function lines($size) {
+  $rhythm-unit: strip-unit($base-unit);
+  $size: strip-unit($size);
+
+  @return ceil($size / $rhythm-unit);
+}
+
+// rhythm, helps you keep a vertical rhythm based on your sites baseline grid.
+@function rhythm($lines: $base-rhythm, $offset: 0) {
+  @if type-of($lines) != number {
+    $lines: map-get($rhythms, $lines);
+  }
+
+  @return rem(($lines * $base-unit) - $offset);
+}
+
+// Line height base on font-size and vertical rythm
+@function _line-height($size, $lines) {
+  $rhythm-unit: strip-unit($base-unit);
+
+  @return $lines * ($rhythm-unit / $size);
+}
+
+@function calc-line-height($size, $lines: auto, $allow-same-line-height-as-size: false) {
+  $size: strip-unit($size);
+  $lines: if($lines == auto, lines($size), $lines);
+  $result: _line-height($size, $lines);
+
+  @if $result == 1 and $allow-same-line-height-as-size == false {
+    @return _line-height($size, $lines + 1);
+  }
+
+  @return $result;
+}
+
+@function size($key, $type: 'default') {
+  @return map-get(map-get($sizes, $key), $type);
+}

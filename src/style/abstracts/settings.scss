@@ -1,0 +1,83 @@
+// Text color
+$text-color: color(dark);
+
+// Rhythm
+$base-unit:   8px;
+$base-rhythm: 3;
+$rhythms: (
+  'base':   $base-rhythm,
+  'half':   $base-rhythm / 2,
+  'double': $base-rhythm * 2,
+  'xsmall': 1,
+  'small':  2,
+  'medium': 4,
+  'large':  5
+);
+
+$base-size: 16;
+$sizes: (
+  base: (
+    default: $base-size
+  ),
+  stockholm: (
+    default: 40,
+    small: 36
+  ),
+  madrid: (
+    default: 32,
+    small: 28
+  ),
+  berlin: (
+    default: 24,
+    small: 20
+  ),
+  london: (
+    default: 20,
+    small: 18
+  ),
+  oslo: (
+    default: 18,
+    small: 16
+  ),
+  paris: (
+    default: 16,
+    small: 14
+  ),
+  amsterdam: (
+    default: 14,
+    small: 12
+  ),
+  rome: (
+    default: 12,
+    small: 10
+  )
+);
+
+// Border radius
+$radius: rem(5px);
+$radius-box: rem(10px);
+$radius-large: rem(50px);
+
+// Fonts
+$font-primary: arial;
+
+// Layout
+// TO BE CHANGED LATER
+$input-height: rem(48px);
+$input-width: rem(296px);
+$col-width: 496px;
+$col-spacing: 32px; // rhythm('medium');
+$side-bar: 96px; // rhythm(12);
+$max-width: $col-width * 2;
+$page-max-width: ($col-width * 2) + ($col-spacing * 3) + $side-bar;
+
+// Modal
+$basic-modal-max-size: rem(680px);
+
+// Breakboints
+// TO BE CHANGED LATER
+$mq-breakpoints: (
+  'medium':  768px,
+  'large':  $max-width,
+  'xl': $page-max-width
+);

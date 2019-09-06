@@ -1,0 +1,55 @@
+@import './typography.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: auto;
+  height: 100%;
+}
+
+body {
+  @include font-smoothing;
+
+  color: $text-color;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: lightgreen;
+  border: rhythm('small') solid violet;
+}
+
+a {
+  $link-color: $text-color;
+
+  color: $link-color;
+  border-bottom: 1px solid $link-color;
+  transition: all ease 200ms;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: shade($link-color);
+    border-bottom-color: transparent;
+  }
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  border-style: none;
+  max-width: 100%;
+  height: auto;
+}

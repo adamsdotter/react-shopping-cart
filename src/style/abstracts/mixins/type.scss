@@ -1,0 +1,77 @@
+@mixin set-type($size, $type: default, $lines: auto, $allow-same-line-height-as-size: true) {
+  @if type-of($size) != number {
+    $size: size($size, $type);
+  }
+
+  font-size: rem($size);
+  line-height: calc-line-height($size, $lines, $allow-same-line-height-as-size);
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin type-stockholm {
+  @include set-type('stockholm', 'small', $allow-same-line-height-as-size: false);
+
+  @include mq('medium') {
+    @include set-type('stockholm', $allow-same-line-height-as-size: false);
+  }
+}
+
+@mixin type-madrid {
+  @include set-type('madrid', 'small', $allow-same-line-height-as-size: false);
+
+  @include mq('medium') {
+    @include set-type('madrid', $allow-same-line-height-as-size: false);
+  }
+}
+
+@mixin type-berlin {
+  @include set-type('berlin', 'small', $allow-same-line-height-as-size: false);
+
+  @include mq('medium') {
+    @include set-type('berlin', $allow-same-line-height-as-size: false);
+  }
+}
+
+@mixin type-london {
+  @include set-type('london', 'small', $allow-same-line-height-as-size: false);
+
+  @include mq('medium') {
+    @include set-type('london', $allow-same-line-height-as-size: false);
+  }
+}
+
+@mixin type-oslo {
+  @include set-type('oslo', 'small');
+
+  @include mq('medium') {
+    @include set-type('oslo', $allow-same-line-height-as-size: false);
+  }
+}
+
+@mixin type-paris {
+  @include set-type('paris', 'small');
+
+  @include mq('medium') {
+    @include set-type('paris', $allow-same-line-height-as-size: false);
+  }
+}
+
+@mixin type-amsterdam {
+  @include set-type('amsterdam', 'small');
+
+  @include mq('medium') {
+    @include set-type('amsterdam');
+  }
+}
+
+@mixin type-rome {
+  @include set-type('rome', 'small');
+
+  @include mq('medium') {
+    @include set-type('rome');
+  }
+}
