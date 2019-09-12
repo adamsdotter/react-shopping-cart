@@ -7,13 +7,18 @@
     "serve": "api-server",
     "pretty": "prettier --write **/*.{md,js,ts,jsx,tsx,json}"
   },
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
   "devDependencies": {
     "avensia-api-sample-server": "https://github.com/avensia/api-sample-server",
+    "eslint": "^6.3.0",
+    "eslint-plugin-react-app": "^6.0.2",
     "node-sass": "^4.7.2",
     "parcel-bundler": "^1.6.2",
+    "parcel-plugin-eslint": "^1.0.7",
     "prettier": "1.11.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
     "typescript": "2.7.2"
   }
 }
