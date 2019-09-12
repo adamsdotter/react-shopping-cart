@@ -53,31 +53,14 @@ $sizes: (
   )
 );
 
-// Border radius
-$radius: rem(5px);
-$radius-box: rem(10px);
-$radius-large: rem(50px);
-
 // Fonts
-$font-primary: arial;
+$font-primary: 'Helvetica Neue', sans-serif;
 
 // Layout
-// TO BE CHANGED LATER
-$input-height: rem(48px);
-$input-width: rem(296px);
-$col-width: 496px;
-$col-spacing: 32px; // rhythm('medium');
-$side-bar: 96px; // rhythm(12);
-$max-width: $col-width * 2;
-$page-max-width: ($col-width * 2) + ($col-spacing * 3) + $side-bar;
-
-// Modal
-$basic-modal-max-size: rem(680px);
+$max-width: 1140px;
 
 // Breakboints
-// TO BE CHANGED LATER
 $mq-breakpoints: (
   'medium':  768px,
-  'large':  $max-width,
-  'xl': $page-max-width
+  'large':  $max-width
 );
