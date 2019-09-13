@@ -1,13 +1,29 @@
 import React from 'react';
+import Product from '../Product';
+import './products.scss';
 
 class Products extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      products: 'Loading products...',
+      products: [],
       error: null
     };
+  }
+
+  products() {
+    const { error } = this.state;
+    let products = this.state.products;
+
+    if (products.length) {
+      products = this.state.products.map((item) => {
+        console.log('ITEM:', item);
+        return <li key={item.id}><Product item={item} /></li>;
+      });
+    }
+
+    return error ? error : products;
   }
 
   fetchProducts() {
@@ -20,8 +36,7 @@ class Products extends React.Component {
             ? response.json()
             : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
       )
-      .then(items => {
-        const products = items.map(item => item.title);
+      .then(products => {
         this.setState({ products })
       })
       .catch(err => {
@@ -37,7 +52,8 @@ class Products extends React.Component {
   render() {
     return (
       <div className="products">
-        {this.state.products || this.state.error }
+        <h1>Products</h1>
+        <ul className="product-list">{this.products()}</ul>
       </div>
     );
   }
