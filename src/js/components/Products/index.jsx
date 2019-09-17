@@ -1,41 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToCart } from '../../actions/index';
+import { addToCart, fetchProducts } from '../../actions/index';
 import Product from '../Product';
 import './products.scss';
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart: product => dispatch(addToCart(product))
+    addToCart: product => dispatch(addToCart(product)),
+    fetchProducts: () => dispatch(fetchProducts())
   };
 };
 
-class ConnectedProducts extends React.Component {
-  constructor() {
-    super();
+const mapStateToProps = state => {
+  return { products: state.products };
+};
+
+class Products extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      products: [],
       error: null
     };
 
-    this.addProductToCart = this.addProductToCart.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   products() {
     const { error } = this.state;
-    let products = this.state.products;
+    let products = this.props.products;
 
     if (products.length) {
-      products = this.state.products.map((item) => {
-        return <li key={item.id}><Product item={item} onClick={this.addProductToCart} /></li>;
+      products = products.map((item) => {
+        return <li key={item.id}><Product item={item} onClick={this.onClick} /></li>;
       });
     }
 
     return error ? error : products;
   }
 
-  addProductToCart(item) {
+  onClick(item) {
     this.props.addToCart({
       title: item.title
     });
@@ -43,21 +47,7 @@ class ConnectedProducts extends React.Component {
 
   fetchProducts() {
     this.setState({ error: null });
-
-    fetch('http://localhost:8181/products')
-      .then(
-        response =>
-          response.ok
-            ? response.json()
-            : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
-      )
-      .then(products => {
-        this.setState({ products })
-      })
-      .catch(err => {
-        const error = `Error: ${err}`;
-        this.setState({ error });
-      });
+    this.props.fetchProducts();
   }
 
   componentDidMount() {
@@ -74,6 +64,4 @@ class ConnectedProducts extends React.Component {
   }
 }
 
-const Products = connect(null, mapDispatchToProps)(ConnectedProducts);
-
-export default Products;
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
