@@ -16,27 +16,12 @@ const mapStateToProps = state => {
 };
 
 class Products extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: null
-    };
-
-    this.onClick = this.onClick.bind(this);
-  }
-
   products() {
-    const { error } = this.state;
-    let products = this.props.products;
+    let { products } = this.props;
 
-    if (products.length) {
-      products = products.map((item) => {
-        return <li key={item.id}><Product item={item} onClick={this.onClick} /></li>;
-      });
-    }
-
-    return error ? error : products;
+    return products.length
+      ? products.map((item) => (<li key={item.id}><Product item={item} onClick={this.onClick.bind(this)} /></li>))
+      : products;
   }
 
   onClick(item) {
@@ -45,13 +30,8 @@ class Products extends React.Component {
     });
   }
 
-  fetchProducts() {
-    this.setState({ error: null });
-    this.props.fetchProducts();
-  }
-
   componentDidMount() {
-    this.fetchProducts();
+    this.props.fetchProducts();
   }
 
   render() {
