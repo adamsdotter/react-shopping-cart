@@ -1,0 +1,11 @@
+export const ADD_TO_CART = 'ADD_TO_CART';
+
+// export const INCREMENT_ARTICLE = 'INCREMENT_ARTICLE';
+//
+// export const DECREMENT_ARTICLE = 'DECREMENT_ARTICLE';
+
+// export const EMPTY_CART = 'EMPTY_CART';
+
+// export const PRODUCTS_LOADED = 'PRODUCTS_LOADED';
+
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';

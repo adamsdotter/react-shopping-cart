@@ -1,27 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './cart.scss';
 
-class Cart extends React.Component {
-  constructor() {
-    super();
+const mapStateToProps = state => {
+  return { cartTotal: state.cartTotal };
+};
 
-    this.state = {
-      expanded: false,
-      products: []
-    };
-  }
+let Cart = ({ cartTotal }) => (
+  <div className="cart">
+    <h1>Carty</h1>
+    Product count {cartTotal}
+  </div>
+);
 
-  render() {
-    const { products } = this.state;
-
-    return (
-      <div className="cart">
-        <h1>Carty</h1>
-        Product count {products.length}
-        <div className="products">{products}</div>
-      </div>
-    );
-  }
+Cart.propTypes = {
+  cartTotal: PropTypes.number.isRequired
 }
+
+Cart = connect(mapStateToProps)(Cart);
 
 export default Cart;

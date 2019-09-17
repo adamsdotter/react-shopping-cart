@@ -19,6 +19,9 @@
     "parcel-bundler": "^1.6.2",
     "parcel-plugin-eslint": "^1.0.7",
     "prettier": "1.11.1",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-devtools": "^3.5.0",
     "typescript": "2.7.2"
   }
 }

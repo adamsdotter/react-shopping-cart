@@ -1,8 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addToCart } from '../../actions/index';
 import Product from '../Product';
 import './products.scss';
 
-class Products extends React.Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: product => dispatch(addToCart(product))
+  };
+};
+
+class ConnectedProducts extends React.Component {
   constructor() {
     super();
 
@@ -10,6 +18,8 @@ class Products extends React.Component {
       products: [],
       error: null
     };
+
+    this.addProductToCart = this.addProductToCart.bind(this);
   }
 
   products() {
@@ -18,12 +28,17 @@ class Products extends React.Component {
 
     if (products.length) {
       products = this.state.products.map((item) => {
-        console.log('ITEM:', item);
-        return <li key={item.id}><Product item={item} /></li>;
+        return <li key={item.id}><Product item={item} onClick={this.addProductToCart} /></li>;
       });
     }
 
     return error ? error : products;
+  }
+
+  addProductToCart(item) {
+    this.props.addToCart({
+      title: item.title
+    });
   }
 
   fetchProducts() {
@@ -58,5 +73,7 @@ class Products extends React.Component {
     );
   }
 }
+
+const Products = connect(null, mapDispatchToProps)(ConnectedProducts);
 
 export default Products;

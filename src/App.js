@@ -3,7 +3,7 @@ import Products from './js/components/Products/';
 import Cart from './js/components/Cart/';
 
 const App = () => (
-  <div className="cart">
+  <div className="app">
     <Cart />
     <Products />
   </div>
