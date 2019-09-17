@@ -1,9 +1,10 @@
 import React from 'react';
 import Products from './js/components/Products/';
+import Cart from './js/components/Cart/';
 
 const App = () => (
   <div className="cart">
-    <h1>Cart</h1>
+    <Cart />
     <Products />
   </div>
 );
