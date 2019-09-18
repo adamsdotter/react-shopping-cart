@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { incrementItem, decrementItem } from '../../actions';
+import { modifyItem } from '../../actions';
 import { HOST } from '../../constants';
 import './cart-item.scss';
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementItem: id => dispatch(incrementItem(id)),
-    decrementItem: id => dispatch(decrementItem(id))
+    modifyItem: payload => dispatch(modifyItem(payload))
   };
 };
 
@@ -23,31 +22,19 @@ class CartItem extends React.Component {
       id: props.item.id
     };
 
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+    this.modify = this.modify.bind(this);
   }
 
-  decrement() {
+  modify(type) {
     const { count, id } = this.state;
     const { item } = this.props;
+    const quantity = type === 'increase' ? count + 1 : count - 1;
 
-    this.props.decrementItem(id);
-
-    this.setState({
-      count: count - 1,
-      price: (count - 1) * item.prices[0].amount
-    });
-  }
-
-  increment() {
-    const { count, id } = this.state;
-    const { item } = this.props;
-
-    this.props.incrementItem(id);
+    this.props.modifyItem({ id, type, quantity });
 
     this.setState({
-      count: count + 1,
-      price: (count + 1) * item.prices[0].amount
+      count: quantity,
+      price: quantity * item.prices[0].amount
     });
   }
 
@@ -70,9 +57,9 @@ class CartItem extends React.Component {
       <div className="cart-item">
         <h4>{title}</h4>
         <img src={imgSrc} alt="" />
-        <button onClick={this.increment}><span className="visually-hidden">Increase</span>+</button>
+        <button onClick={() => this.modify('increase')}><span className="visually-hidden">Increase</span>+</button>
         <p className="count">{count}</p>
-        <button onClick={this.decrement}><span className="visually-hidden">Decrease</span>-</button>
+        <button onClick={() => this.modify('decrease')}><span className="visually-hidden">Decrease</span>-</button>
         <button onClick={this.remove}><span className="visually-hidden">Remove item</span>x</button>
         <p className="price">{price} {prices[0].currency}</p>
       </div>

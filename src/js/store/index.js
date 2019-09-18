@@ -3,10 +3,9 @@ import rootReducer from '../reducers/';
 
 import fetchProducts from '../middleware/fetchProducts';
 import addToCart from '../middleware/addToCart';
-import incrementItem from '../middleware/incrementItem';
-import decrementItem from '../middleware/decrementItem';
+import modifyItem from '../middleware/modifyItem';
 
-const middleWares = [fetchProducts, addToCart, incrementItem, decrementItem];
+const middleWares = [fetchProducts, addToCart, modifyItem];
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
