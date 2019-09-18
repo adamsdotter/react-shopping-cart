@@ -1,8 +1,9 @@
 import { PRODUCTS_LOADED, FETCH_PRODUCTS } from '../constants/action-types';
+import { HOST } from '../constants';
 
-const getProductsMiddleware = ({ dispatch }) => next => action => {
+const fetchProducts = ({ dispatch }) => next => action => {
   if (action.type === FETCH_PRODUCTS) {
-    return fetch('http://localhost:8181/products')
+    return fetch(`${HOST}/products`)
       .then(
         response =>
           response.ok
@@ -16,4 +17,4 @@ const getProductsMiddleware = ({ dispatch }) => next => action => {
   return next(action);
 };
 
-export default getProductsMiddleware;
+export default fetchProducts;

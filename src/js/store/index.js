@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers/';
-import getProductsMiddleware from '../middleware/getProductsMiddleware';
+import fetchCartCount from '../middleware/fetchCartCount';
+import fetchProducts from '../middleware/fetchProducts';
+const middleWares = [fetchCartCount, fetchProducts];
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const middleWares = [getProductsMiddleware];
 
 const store = createStore(
   rootReducer,

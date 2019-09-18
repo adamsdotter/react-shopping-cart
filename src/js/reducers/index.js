@@ -1,9 +1,13 @@
-import { PRODUCTS_LOADED, ADD_TO_CART } from '../constants/action-types';
+import { PRODUCTS_LOADED, ADD_TO_CART, CART_COUNT } from '../constants/action-types';
 
 const initialState = {
-  cartTotal: 12,
   products: [],
-  expandedCart: false
+  cart: {
+    expanded: false,
+    count: 0,
+    sumTotal: 0,
+    products: []
+  }
 };
 
 
@@ -14,10 +18,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: state.products.concat(action.payload)
       };
+    case CART_COUNT:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          count: action.payload
+        }
+      };
     case ADD_TO_CART:
       return {
         ...state,
-        cartTotal: state.cartTotal + 1
+        cart: {
+          ...state.cart,
+          count: state.cart.count + 1
+        }
       };
 
     default:
