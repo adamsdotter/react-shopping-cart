@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { incrementItem } from '../../actions'; // correct action
+import { incrementItem, decrementItem } from '../../actions';
 import { HOST } from '../../constants';
 import './cart-item.scss';
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementItem: id => dispatch(incrementItem(id))
+    incrementItem: id => dispatch(incrementItem(id)),
+    decrementItem: id => dispatch(decrementItem(id))
   };
 };
 
@@ -23,10 +24,19 @@ class CartItem extends React.Component {
     };
 
     this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
   }
 
   decrement() {
-    console.log('-');
+    const { count, id } = this.state;
+    const { item } = this.props;
+
+    this.props.decrementItem(id);
+
+    this.setState({
+      count: count - 1,
+      price: (count - 1) * item.prices[0].amount
+    });
   }
 
   increment() {
@@ -39,6 +49,10 @@ class CartItem extends React.Component {
       count: count + 1,
       price: (count + 1) * item.prices[0].amount
     });
+  }
+
+  updateCount() {
+    console.log('r');
   }
 
   remove() {
@@ -58,7 +72,7 @@ class CartItem extends React.Component {
         <img src={imgSrc} alt="" />
         <button onClick={this.increment}><span className="visually-hidden">Increase</span>+</button>
         <p className="count">{count}</p>
-        <button><span className="visually-hidden">Decrease</span>-</button>
+        <button onClick={this.decrement}><span className="visually-hidden">Decrease</span>-</button>
         <button onClick={this.remove}><span className="visually-hidden">Remove item</span>x</button>
         <p className="price">{price} {prices[0].currency}</p>
       </div>

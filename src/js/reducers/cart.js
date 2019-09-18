@@ -1,4 +1,4 @@
-import { ADDED_TO_CART, ITEM_ADDED } from '../constants/action-types';
+import { ADDED_TO_CART, ITEM_INCREMENTED, ITEM_DECREMENTED } from '../constants/action-types';
 
 const initialState = {
   count: 0,
@@ -16,11 +16,18 @@ export default function cart(state = initialState, action) {
         count: state.count + 1,
         sumTotal: state.sumTotal + action.payload.summery[0].amount
       };
-    case ITEM_ADDED:
+    case ITEM_INCREMENTED:
       return {
         ...state,
         count: state.count + 1,
         sumTotal: state.sumTotal + action.payload.sumTotal
+      };
+
+    case ITEM_DECREMENTED:
+      return {
+        ...state,
+        count: state.count - 1,
+        sumTotal: state.sumTotal - action.payload.sumTotal
       };
 
     default:

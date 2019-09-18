@@ -1,8 +1,8 @@
-import { INCREMENT_ITEM, ITEM_INCREMENTED } from '../constants/action-types';
+import { DECREMENT_ITEM, ITEM_DECREMENTED } from '../constants/action-types';
 import { HOST } from '../constants';
 
 const incrementItem = ({ dispatch }) => next => action => {
-  if (action.type === INCREMENT_ITEM) {
+  if (action.type === DECREMENT_ITEM) {
     fetch(`${HOST}/cart/${action.payload}`, {
         method: 'PUT',
         headers: {
@@ -10,7 +10,7 @@ const incrementItem = ({ dispatch }) => next => action => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          quantity: 1 // skicka med quantity från anropet?? 
+          quantity: 1
         })
       })
       .then(
@@ -20,8 +20,8 @@ const incrementItem = ({ dispatch }) => next => action => {
             : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
       )
       .then(cart => {
-        console.log('INCREMENTED item>>>>>', cart);
-        dispatch({ type: ITEM_INCREMENTED, payload: {
+        console.log('ITEM_DECREMENTED item>>>>>', cart);
+        dispatch({ type: ITEM_DECREMENTED, payload: {
           sumTotal: cart.summery[0].amount,
           count: cart.items.lenght
         }});
