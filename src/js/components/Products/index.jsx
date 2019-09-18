@@ -24,10 +24,8 @@ class Products extends React.Component {
       : products;
   }
 
-  onClick(item) {
-    this.props.addToCart({
-      title: item.title
-    });
+  onClick(id) {
+    this.props.addToCart({ id });
   }
 
   componentDidMount() {
