@@ -1,23 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchCartCount } from '../../actions';
 import './cart.scss';
 
-const mapStateToProps = state => {
-  return { cartTotal: state.cartTotal };
+const mapDispatchToProps = dispatch => {
+  return {
+    getCartCount: () => dispatch(fetchCartCount())
+  };
 };
 
-let Cart = ({ cartTotal }) => (
-  <div className="cart">
-    <h1>Carty</h1>
-    Product count {cartTotal}
-  </div>
-);
+const mapStateToProps = state => {
+  return { cartCount: state.cart.count };
+};
 
-Cart.propTypes = {
-  cartTotal: PropTypes.number.isRequired
+class Cart extends React.Component {
+
+    componentDidMount() {
+      this.props.getCartCount();
+    }
+
+    render() {
+      return (
+        <div className="cart">
+          <h1>Cart</h1>
+          Product count {this.props.cartCount}
+        </div>
+      );
+    }
 }
 
-Cart = connect(mapStateToProps)(Cart);
+Cart.propTypes = {
+  cartCount: PropTypes.number.isRequired
+}
 
-export default Cart;
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
