@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { HOST } from '../../constants';
 import './product.scss';
 
-// TODO: correct img
+const Product = ({ item, onClick }) => {
+  const { title, prices, imageUrl } = item;
+  const imgSrc = `${HOST}${imageUrl}`;
+  const price = prices[0] ? `${prices[0].amount} ${prices[0].currency}` : null;
 
-const Product = ({ item, onClick }) => (
-  <div className="product">
-    <h3>{item.title}</h3>
-    <img src="https://images-na.ssl-images-amazon.com/images/I/81pybH09vyL._SY355_.jpg" alt="" />
-    <button onClick={()=>onClick(item)}>Add to cart</button>
-  </div>
-);
+  return (
+    <div className="product">
+      <h3>{title}</h3>
+      <img src={imgSrc} alt="" />
+      <p>{price}</p>
+      <button onClick={()=>onClick(item.id)}>Add to cart</button>
+    </div>
+  );
+};
 
 Product.propTypes = {
   item: PropTypes.object.isRequired,
