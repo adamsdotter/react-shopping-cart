@@ -1,30 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCartCount } from '../../actions';
+import CartOverview from '../CartOverview/'
 import './cart.scss';
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    getCartCount: () => dispatch(fetchCartCount())
+    cartCount: state.cart.count,
+    items: state.cart.items
   };
 };
 
-const mapStateToProps = state => {
-  return { cartCount: state.cart.count };
-};
-
 class Cart extends React.Component {
+    constructor() {
+      super();
 
-    componentDidMount() {
-      this.props.getCartCount();
+      this.state = {
+        expanded: true
+      };
+
+      this.toggleViewCart = this.toggleViewCart.bind(this);
+    }
+
+    toggleViewCart() {
+      this.setState({ expanded: !this.state.expanded });
     }
 
     render() {
+      const { items, cartCount } = this.props;
+
       return (
         <div className="cart">
           <h1>Cart</h1>
-          Product count {this.props.cartCount}
+          Product count {cartCount}
+          <button onClick={this.toggleViewCart}>View cart</button>
+          { this.state.expanded ? <CartOverview items={items} /> : null }
         </div>
       );
     }
@@ -34,4 +44,4 @@ Cart.propTypes = {
   cartCount: PropTypes.number.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps)(Cart);

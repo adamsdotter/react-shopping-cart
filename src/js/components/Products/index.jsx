@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 class Products extends React.Component {
   products() {
-    let { products } = this.props;
+    const { products } = this.props;
 
     return products.length
       ? products.map((item) => (<li key={item.id}><Product item={item} onClick={this.onClick.bind(this)} /></li>))

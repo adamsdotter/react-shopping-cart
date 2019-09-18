@@ -1,7 +1,6 @@
 import { ADDED_TO_CART, CART_COUNT } from '../constants/action-types';
 
 const initialState = {
-  expanded: false,
   count: 0,
   sumTotal: 0,
   items: []
