@@ -1,10 +1,10 @@
-import { ADD_TO_CART, CART_COUNT } from '../constants/action-types';
+import { ADDED_TO_CART, CART_COUNT } from '../constants/action-types';
 
 const initialState = {
   expanded: false,
   count: 0,
   sumTotal: 0,
-  products: []
+  items: []
 };
 
 export default function cart(state = initialState, action) {
@@ -14,9 +14,10 @@ export default function cart(state = initialState, action) {
         ...state,
         count: action.payload
       };
-    case ADD_TO_CART:
+    case ADDED_TO_CART:
       return {
         ...state,
+        items: state.items.concat(action.payload),
         count: state.count + 1
       };
 

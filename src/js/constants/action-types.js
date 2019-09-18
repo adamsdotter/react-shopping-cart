@@ -1,4 +1,5 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const ADDED_TO_CART = 'ADDED_TO_CART';
 
 export const FETCH_CART_COUNT = 'FETCH_CART_COUNT';
 export const CART_COUNT = 'CART_COUNT';
