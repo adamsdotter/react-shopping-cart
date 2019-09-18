@@ -1,43 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { removeItem } from '../../actions'; // correct action
+import { connect } from 'react-redux';
+import { incrementItem } from '../../actions'; // correct action
 import { HOST } from '../../constants';
 import './cart-item.scss';
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     removeItem: () => dispatch(removeItem())
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    incrementItem: id => dispatch(incrementItem(id))
+  };
+};
+
 
 class CartItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 1,
+      price: props.item.prices[0].amount || 0,
+      id: props.item.id
+    };
+
+    this.increment = this.increment.bind(this);
+  }
 
   decrement() {
     console.log('-');
   }
 
   increment() {
-    console.log('+');
+    const { count, id } = this.state;
+    const { item } = this.props;
+
+    this.props.incrementItem(id);
+
+    this.setState({
+      count: count + 1,
+      price: (count + 1) * item.prices[0].amount
+    });
   }
 
   remove() {
-    console.log('remove');
+    console.log('Delete',);
   }
 
   render() {
-    const { title, imageUrl } = this.props.item;
-    const imgSrc = `${HOST}${imageUrl}`;
+    const { title, imageUrl, prices } = this.props.item;
+    const { count, price } = this.state;
 
+    const imgSrc = `${HOST}${imageUrl}`;
+    // console.log('this.props.item', this.props.item);
+    // console.log('this.props.item', this.props);
     return (
       <div className="cart-item">
         <h4>{title}</h4>
         <img src={imgSrc} alt="" />
-        <button><span className="visually-hidden">Increase</span>+</button>
-        <p className="count">0</p>
+        <button onClick={this.increment}><span className="visually-hidden">Increase</span>+</button>
+        <p className="count">{count}</p>
         <button><span className="visually-hidden">Decrease</span>-</button>
-        <button><span className="visually-hidden">Remove item</span>x</button>
-        <p className="price">Total price: 0</p>
+        <button onClick={this.remove}><span className="visually-hidden">Remove item</span>x</button>
+        <p className="price">{price} {prices[0].currency}</p>
       </div>
     );
   }
@@ -47,5 +70,4 @@ CartItem.propTypes = {
   item: PropTypes.object.isRequired
 }
 
-export default CartItem;
-// export default connect(null, mapDispatchToProps)(CartItem);
+export default connect(null, mapDispatchToProps)(CartItem);
