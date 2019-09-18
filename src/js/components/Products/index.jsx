@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  return { products: state.products };
+  return { products: state.products.items };
 };
 
 class Products extends React.Component {
