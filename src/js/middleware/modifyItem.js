@@ -1,16 +1,16 @@
-import { INCREMENT_ITEM, ITEM_INCREMENTED } from '../constants/action-types';
+import { MODIFY_ITEM, ITEM_INCREMENTED, ITEM_DECREMENTED  } from '../constants/action-types';
 import { HOST } from '../constants';
 
-const incrementItem = ({ dispatch }) => next => action => {
-  if (action.type === INCREMENT_ITEM) {
-    fetch(`${HOST}/cart/${action.payload}`, {
+const modifyItem = ({ dispatch }) => next => action => {
+  if (action.type === MODIFY_ITEM) {
+    fetch(`${HOST}/cart/${action.payload.id}`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          quantity: 1 // skicka med quantity från anropet?? 
+          quantity: action.payload.quantity
         })
       })
       .then(
@@ -20,8 +20,10 @@ const incrementItem = ({ dispatch }) => next => action => {
             : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
       )
       .then(cart => {
-        console.log('INCREMENTED item>>>>>', cart);
-        dispatch({ type: ITEM_INCREMENTED, payload: {
+        const type = action.payload.type === 'decrease' ? ITEM_DECREMENTED : ITEM_INCREMENTED;
+        console.log(type,' cart>>>>>', cart);
+
+        dispatch({ type, payload: {
           sumTotal: cart.summery[0].amount,
           count: cart.items.lenght
         }});
@@ -30,4 +32,4 @@ const incrementItem = ({ dispatch }) => next => action => {
   return next(action);
 };
 
-export default incrementItem;
+export default modifyItem;
