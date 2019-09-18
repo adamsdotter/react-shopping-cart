@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import CartItem from '../CartItem/';
 
 const getItem = (product) => {
+  if (!product) {
+    return null;
+  }
+
   const item = product.items[0].product;
 
   return <CartItem key={item.id} item={item} />;

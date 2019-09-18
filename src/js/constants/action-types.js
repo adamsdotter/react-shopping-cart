@@ -1,15 +1,8 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const ADDED_TO_CART = 'ADDED_TO_CART';
 
-export const FETCH_CART_COUNT = 'FETCH_CART_COUNT';
-export const CART_COUNT = 'CART_COUNT';
-
-
-// export const INCREMENT_ARTICLE = 'INCREMENT_ARTICLE';
-//
-// export const DECREMENT_ARTICLE = 'DECREMENT_ARTICLE';
-
-// export const EMPTY_CART = 'EMPTY_CART';
+export const INCREMENT_ITEM = 'INCREMENT_ITEM';
+export const ITEM_ADDED = 'ITEM_ADDED';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const PRODUCTS_LOADED = 'PRODUCTS_LOADED';

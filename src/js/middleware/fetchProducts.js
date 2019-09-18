@@ -3,7 +3,7 @@ import { HOST } from '../constants';
 
 const fetchProducts = ({ dispatch }) => next => action => {
   if (action.type === FETCH_PRODUCTS) {
-    return fetch(`${HOST}/products`)
+    fetch(`${HOST}/products`)
       .then(
         response =>
           response.ok
@@ -11,7 +11,7 @@ const fetchProducts = ({ dispatch }) => next => action => {
             : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
       )
       .then(products => {
-        return dispatch({ type: PRODUCTS_LOADED, payload: products });
+        dispatch({ type: PRODUCTS_LOADED, payload: products });
       })
   }
   return next(action);

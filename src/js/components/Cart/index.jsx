@@ -6,8 +6,9 @@ import './cart.scss';
 
 const mapStateToProps = state => {
   return {
-    cartCount: state.cart.count,
-    items: state.cart.items
+    count: state.cart.count,
+    items: state.cart.items,
+    sumTotal: state.cart.sumTotal
   };
 };
 
@@ -27,12 +28,13 @@ class Cart extends React.Component {
     }
 
     render() {
-      const { items, cartCount } = this.props;
+      const { items, count, sumTotal } = this.props;
 
       return (
         <div className="cart">
           <h1>Cart</h1>
-          Product count {cartCount}
+          <p>Product count: { count }</p>
+          <p>Total amount: { sumTotal }</p>
           <button onClick={this.toggleViewCart}>View cart</button>
           { this.state.expanded ? <CartOverview items={items} /> : null }
         </div>
@@ -41,7 +43,9 @@ class Cart extends React.Component {
 }
 
 Cart.propTypes = {
-  cartCount: PropTypes.number.isRequired
+  count: PropTypes.number.isRequired,
+  items: PropTypes.array.isRequired,
+  sumTotal: PropTypes.number.isRequired
 }
 
 export default connect(mapStateToProps)(Cart);

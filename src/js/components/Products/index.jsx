@@ -25,7 +25,7 @@ class Products extends React.Component {
   }
 
   onClick(id) {
-    this.props.addToCart({ id });
+    this.props.addToCart(id);
   }
 
   componentDidMount() {
