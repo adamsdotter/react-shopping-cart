@@ -6,7 +6,7 @@ import './products.scss';
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart: product => dispatch(addToCart(product)),
+    addToCart: id => dispatch(addToCart(id)),
     fetchProducts: () => dispatch(fetchProducts())
   };
 };
