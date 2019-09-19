@@ -15,6 +15,7 @@
   img {
     max-width: 80%;
     margin-bottom: rhythm('small');
+    transition: all ease 200ms;
 
     @include mq('medium') {
       max-width: 60%;
