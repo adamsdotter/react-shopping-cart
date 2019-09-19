@@ -1,17 +1,23 @@
-.cart {
-  button {
-    text-align: right;
-    float: right;
-    cursor: pointer;
-    padding-bottom: 2rem;
-  }
+@import '../../../style/abstracts/index.scss';
 
-  .text {
-    display: block;
-    border-bottom: 1px solid #333;
-    font-size: 13px;
-    margin-bottom: 1rem;
-    padding-top: 0.5rem;
-  }
+.toggle-cart {
+  border: 0;
+  color: color(secondary);
+  text-align: right;
+  float: right;
+  cursor: pointer;
+  padding-bottom: 1rem;
+}
 
+
+.toggle-cart__text {
+  display: block;
+  border-bottom: 1px solid color(secondary);
+  font-size: 13px;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+}
+
+.toggle-cart__icon {
+  @include set-type(berlin);
 }

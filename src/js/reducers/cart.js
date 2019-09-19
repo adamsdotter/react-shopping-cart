@@ -3,6 +3,7 @@ import { ITEM_ADDED, ITEM_REMOVED, ITEM_INCREMENTED, ITEM_DECREMENTED } from '..
 const initialState = {
   count: 0,
   sumTotal: 0,
+  currency: 'kr',
   items: []
 };
 
@@ -22,7 +23,8 @@ export default function cart(state = initialState, action) {
         ...state,
         items: state.items.concat(addedItem),
         count: state.count + 1,
-        sumTotal: state.sumTotal + action.payload.summery[0].amount
+        sumTotal: state.sumTotal + action.payload.summery[0].amount,
+        currency: action.payload.summery[0].currency
       };
 
     case ITEM_REMOVED:

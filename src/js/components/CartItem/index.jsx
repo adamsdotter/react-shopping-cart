@@ -56,13 +56,24 @@ class CartItem extends React.Component {
 
     return (
       <div className="cart-item">
-        <h4>{title}</h4>
         <img src={imgSrc} alt="" />
-        <button onClick={() => this.modify('increase')}><span className="visually-hidden">Increase</span>+</button>
-        <p className="count">{count}</p>
-        <button onClick={() => this.modify('decrease')}><span className="visually-hidden">Decrease</span>-</button>
-        <button onClick={this.remove}><span className="visually-hidden">Remove item</span>x</button>
-        <p className="price">{price} {this.currency}</p>
+        <h4>{title}</h4>
+        <div className="cart-item__edit">
+          <button className="cart-item__modify" onClick={() => this.modify('decrease')}>
+            <span className="visually-hidden">Decrease</span>
+            <span className="icon-dec" aria-hidden>&#10134;</span>
+          </button>
+          <p className="cart-item__count">{count}</p>
+          <button className="cart-item__modify" onClick={() => this.modify('increase')}>
+            <span className="visually-hidden">Increase</span>
+            <span className="icon-inc" aria-hidden>&#10133;</span>
+          </button>
+        </div>
+        <p className="cart-item__price">{price} <span className="cart-item__currency">{this.currency}</span></p>
+        <button className="cart-item__remove" onClick={this.remove}>
+          <span className="visually-hidden">Remove item</span>
+          <span className="icon-rem" aria-hidden>&#128465;</span>
+        </button>
       </div>
     );
   }

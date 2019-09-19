@@ -1,22 +1,46 @@
+@import '../../../style/abstracts/index.scss';
+
 .cart-overview {
   clear: both;
-  background-color: white;
+  background-color: color(white);
+  margin-bottom: rhythm();
 
   ul {
     list-style-type: none;
-    padding: 0 2rem;
+
+    @include mq('medium') {
+        padding-right: rhythm();
+        padding-left: rhythm();
+    }
+  }
+
+  li {
+    background-color: color(white);
+
+    &:nth-child(even) {
+      background-color: color(cloud);
+    }
+  }
+}
+
+.cart-sum {
+  text-align: right;
+  padding: 0 rhythm('small') rhythm('small');
+
+  span {
+    font-weight: bold;
   }
 }
 
 .empty-cart {
   text-transform: none;
-  padding: 1.5rem 2rem 1rem;
+  padding: rhythm('small');
   display: flex;
   align-items: center;
   flex-flow: column;
 
   span {
-    font-size: 24px;
-    padding-left: 0.5rem;
+    @include set-type(madrid, 'small');
+    padding-top: rhythm('xsmall');
   }
 }

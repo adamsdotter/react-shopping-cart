@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import CartItem from '../CartItem/';
 import './cart-overview.scss';
 
-const getItem = item => <li><CartItem key={item.id} item={item} /></li>;
-
-const CartOverview = ({ items, sumTotal }) => {
+const CartOverview = ({ items, sumTotal, currency }) => {
   return (
     <div className="cart-overview">
       { items.length
         ? (
           <div>
-            <ul>{items.map(item => getItem(item))}</ul>
-            <p>Total sum { sumTotal }</p>
+            <ul>{items.map(item => <li key={item.id}><CartItem item={item} /></li>)}</ul>
+            <p className="cart-sum">Total: <span>{sumTotal} {currency}</span></p>
           </div>
         )
         : <p className="empty-cart">Your cart is empty <span aria-hidden>&#128546;</span></p>
@@ -23,7 +21,8 @@ const CartOverview = ({ items, sumTotal }) => {
 
 CartOverview.propTypes = {
   items: PropTypes.array.isRequired,
-  sumTotal: PropTypes.number.isRequired
+  sumTotal: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired
 }
 
 export default CartOverview;
