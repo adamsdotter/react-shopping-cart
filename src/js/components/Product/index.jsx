@@ -10,10 +10,10 @@ const Product = ({ item, onClick, inCart }) => {
 
   return (
     <div className="product">
-      <h3>{title}</h3>
       <img src={imgSrc} alt="" />
-      <p>{price}</p>
-      <button disabled={inCart} onClick={()=>onClick(item.id)}>Add to cart</button>
+      <h3>{title}</h3>
+      <p class="price">{price}</p>
+      <button disabled={inCart} onClick={()=>onClick(item.id)}><span>Add to cart</span></button>
     </div>
   );
 };

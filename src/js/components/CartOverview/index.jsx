@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CartItem from '../CartItem/';
+import './cart-overview.scss';
 
 const getItem = (item) => {
-  // console.log('item =>>>>>', item);
   return <CartItem key={item.id} item={item} />
 };
 
-const CartOverview = ({ items }) => {
-  // console.log('ITEMS', items);
+const CartOverview = ({ items, sumTotal }) => {
   return (
     <div className="cart-overview">
-      <h1>ALL PRODUCTS</h1>
       { items ? items.map(item => getItem(item)) : null }
+      <p>Total sum { sumTotal }</p>
     </div>
   );
 }
 
 CartOverview.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  sumTotal: PropTypes.number.isRequired
 }
 
 export default CartOverview;
