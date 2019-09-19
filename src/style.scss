@@ -1,1 +1,6 @@
 @import './style/global-style';
+
+.app {
+  max-width: $max-width;
+  margin: 0 auto;
+}

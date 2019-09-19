@@ -24,7 +24,6 @@ class CartItem extends React.Component {
     };
 
     this.id = item.id;
-    this.currency = item.prices[0].currency;
     this.basePrice = item.prices[0].amount;
 
     this.modify = this.modify.bind(this);
@@ -58,6 +57,9 @@ class CartItem extends React.Component {
       <div className="cart-item">
         <img src={imgSrc} alt="" />
         <h4>{title}</h4>
+
+        <p className="cart-item__price">{price}</p>
+
         <div className="cart-item__edit">
           <button className="cart-item__modify" onClick={() => this.modify('decrease')}>
             <span className="visually-hidden">Decrease</span>
@@ -68,12 +70,11 @@ class CartItem extends React.Component {
             <span className="visually-hidden">Increase</span>
             <span className="icon-inc" aria-hidden>&#10133;</span>
           </button>
+          <button className="cart-item__remove" onClick={this.remove}>
+            <span className="visually-hidden">Remove item</span>
+            <span className="icon-rem" aria-hidden>&#128465;</span>
+          </button>
         </div>
-        <p className="cart-item__price">{price} <span className="cart-item__currency">{this.currency}</span></p>
-        <button className="cart-item__remove" onClick={this.remove}>
-          <span className="visually-hidden">Remove item</span>
-          <span className="icon-rem" aria-hidden>&#128465;</span>
-        </button>
       </div>
     );
   }

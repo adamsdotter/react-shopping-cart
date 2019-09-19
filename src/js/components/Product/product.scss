@@ -1,11 +1,16 @@
 @import '../../../style/abstracts/index.scss';
 
 .product {
-  border-top: #dadad0 1px solid; //todo: colors
+  border-top: color(pale) 1px solid;
   text-align: center;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   padding-top: 1rem;
+
+  @include mq('large') {
+    border-top: 0;
+    margin-bottom: 2rem;
+  }
 
   img {
     max-width: 80%;
@@ -21,8 +26,8 @@
     position: relative;
 
     &:disabled {
-      border-color: #bdbbbb;
-      color: #bdbbbb;
+      border-color: color(pale);
+      color: color(pale);
       cursor: not-allowed;
     }
 

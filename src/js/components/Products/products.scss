@@ -3,11 +3,6 @@
 .products {
   clear: both;
   text-align: center;
-  max-width: $max-width;
-
-  @include mq('large') {
-    margin: 0 auto;
-  }
 }
 
 .product-list {
@@ -20,6 +15,15 @@
     flex-wrap: wrap;
     padding-right: rhythm('double');
     padding-left: rhythm('double');
+  }
+
+  @include mq('large') {
+    border-top: color(pale) 1px solid;
+  }
+
+  @include mq('xlarge') {
+    padding-right: 0;
+    padding-left: 0;
   }
 
   li {

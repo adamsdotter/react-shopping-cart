@@ -2,6 +2,7 @@ $colors: (
   primary: #777,
   secondary: #444,
   sand: #edeadf,
+  pale: #dadad0,
   white: #fff,
   dark: #555,
   cloud: #f5f5f3
@@ -20,7 +21,7 @@ $colors: (
   @return lighten($color, $percent);
 }
 
-@function shade($color, $percent: 18%) {
+@function shade($color, $percent: 14%) {
   @return darken($color, $percent);
 }
 
