@@ -8,7 +8,8 @@ const mapStateToProps = state => {
   return {
     count: state.cart.count,
     items: state.cart.items,
-    sumTotal: state.cart.sumTotal
+    sumTotal: state.cart.sumTotal,
+    currency: state.cart.currency
   };
 };
 
@@ -28,18 +29,18 @@ class Cart extends React.Component {
     }
 
     render() {
-      const { items, count, sumTotal } = this.props;
+      const { items, count, sumTotal, currency } = this.props;
 
       return (
-        <div class="cart">
+        <div className="cart">
           <h1 className="visually-hidden">Avensia's webshop</h1>
-          <button onClick={this.toggleViewCart}>
-            <span className="text">View cart</span>
-            <span role="img" aria-label="Cart items">&#128722;</span>
+          <button className="toggle-cart" onClick={this.toggleViewCart}>
+            <span className="toggle-cart__text">View cart</span>
+            <span className="toggle-cart__icon" role="img" aria-hidden>&#128722;</span>
             { count }
           </button>
 
-          { this.state.expanded ? <CartOverview items={items} sumTotal={sumTotal} /> : null }
+          { this.state.expanded ? <CartOverview items={items} sumTotal={sumTotal} currency={currency} /> : null }
         </div>
       );
     }
@@ -48,7 +49,8 @@ class Cart extends React.Component {
 Cart.propTypes = {
   count: PropTypes.number.isRequired,
   items: PropTypes.array.isRequired,
-  sumTotal: PropTypes.number.isRequired
+  sumTotal: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps)(Cart);

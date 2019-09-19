@@ -1,8 +1,65 @@
+@import '../../../style/abstracts/index.scss';
+
 .cart-item {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
+  padding: rhythm('xsmall');
 
   img {
-    max-width: 5rem;
+    max-width: 2.5rem;
+    padding-right: rhythm('xsmall');
+
+    @include mq('medium') {
+      max-width: rhythm('large');
+    }
+  }
+
+  h4 {
+    @include set-type(london, 'small');
+
+    margin: 0;
+    width: 9rem;
+  }
+}
+
+.cart-item__edit {
+  display: flex;
+  width: 5rem;
+  align-items: center;
+}
+
+.cart-item__price {
+  margin: 0;
+  text-align: right;
+  flex: 1;
+}
+
+.cart-item__count {
+  margin: 0 rhythm('xsmall');
+}
+
+.cart-item__remove {
+  @include set-type(paris, 'small');
+
+  margin-left: rhythm();
+  border: 0;
+  padding: 0;
+}
+
+.cart-item__modify {
+  padding: 0;
+  border: 0;
+
+  .icon {
+    @include set-type(paris);
+  }
+}
+
+.cart-item__currency {
+  @include visuallyhidden;
+
+  @include mq('medium') {
+    @include show-visuallyhidden;
   }
 }

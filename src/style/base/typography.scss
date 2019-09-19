@@ -44,14 +44,8 @@ p {
   }
 }
 
-b,
-strong,
-dt {
-  font-weight: bold;
-}
-
-dd {
-  margin-left: 0;
+ul {
+  padding: 0;
 }
 
 h1,
@@ -84,16 +78,4 @@ h4,
   @include type-london;
 
   margin-bottom: rhythm('xsmall');
-}
-
-ul,
-ol {
-  padding-left: rhythm();
-}
-
-ul ul,
-ul ol,
-ol ol,
-ol ul {
-  margin-bottom: 0;
 }
