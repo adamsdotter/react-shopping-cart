@@ -44,34 +44,10 @@
   }
 }
 
-@mixin type-oslo {
-  @include set-type('oslo', 'small');
-
-  @include mq('medium') {
-    @include set-type('oslo', $allow-same-line-height-as-size: false);
-  }
-}
-
 @mixin type-paris {
   @include set-type('paris', 'small');
 
   @include mq('medium') {
     @include set-type('paris', $allow-same-line-height-as-size: false);
-  }
-}
-
-@mixin type-amsterdam {
-  @include set-type('amsterdam', 'small');
-
-  @include mq('medium') {
-    @include set-type('amsterdam');
-  }
-}
-
-@mixin type-rome {
-  @include set-type('rome', 'small');
-
-  @include mq('medium') {
-    @include set-type('rome');
   }
 }

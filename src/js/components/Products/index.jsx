@@ -46,7 +46,7 @@ class Products extends React.Component {
   render() {
     return (
       <div className="products">
-        <h1>Products</h1>
+        <h2>Our products</h2>
         <ul className="product-list">{this.products()}</ul>
       </div>
     );

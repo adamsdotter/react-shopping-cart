@@ -69,14 +69,15 @@ h2,
   @include type-madrid;
 
   margin-bottom: rhythm('small');
+  text-transform: uppercase;
 }
 
 h3,
-.type-berlin {
-  @include type-berlin;
+.type-paris {
+  @include type-paris;
 
-  font-weight: normal;
   margin-bottom: rhythm('small');
+  text-transform: uppercase;
 }
 
 h4,
@@ -84,30 +85,6 @@ h4,
   @include type-london;
 
   margin-bottom: rhythm('xsmall');
-}
-
-h5,
-h6,
-.type-oslo {
-  @include type-oslo;
-
-  margin-bottom: rhythm('xsmall');
-}
-
-.type-paris {
-  @include type-paris;
-}
-
-caption,
-figcaption,
-.caption,
-.type-amsterdam {
-  @include type-amsterdam;
-}
-
-small,
-.type-rome {
-  @include type-rome;
 }
 
 ul,
@@ -120,12 +97,4 @@ ul ol,
 ol ol,
 ol ul {
   margin-bottom: 0;
-}
-
-.sub-heading {
-  margin-bottom: 0;
-
-  @include mq('medium') {
-    margin-bottom: rhythm('xsmall');
-  }
 }

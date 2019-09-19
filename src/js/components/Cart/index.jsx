@@ -31,12 +31,15 @@ class Cart extends React.Component {
       const { items, count, sumTotal } = this.props;
 
       return (
-        <div className="cart">
-          <h1>Cart</h1>
-          <p>Product count: { count }</p>
-          <p>Total amount: { sumTotal }</p>
-          <button onClick={this.toggleViewCart}>View cart</button>
-          { this.state.expanded ? <CartOverview items={items} /> : null }
+        <div class="cart">
+          <h1 className="visually-hidden">Avensia's webshop</h1>
+          <button onClick={this.toggleViewCart}>
+            <span className="text">View cart</span>
+            <span role="img" aria-label="Cart items">&#128722;</span>
+            { count }
+          </button>
+
+          { this.state.expanded ? <CartOverview items={items} sumTotal={sumTotal} /> : null }
         </div>
       );
     }
