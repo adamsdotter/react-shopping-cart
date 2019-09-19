@@ -12,7 +12,10 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  return { products: state.products.items };
+  return {
+    products: state.products.items,
+    cartItems: state.cart.items
+  };
 };
 
 class Products extends React.Component {
@@ -20,8 +23,16 @@ class Products extends React.Component {
     const { products } = this.props;
 
     return products.length
-      ? products.map((item) => (<li key={item.id}><Product item={item} onClick={this.onClick.bind(this)} /></li>))
+      ? products.map((item) => (
+        <li key={item.id}>
+          <Product item={item} onClick={this.onClick.bind(this)} inCart={this.isItemInCart(item.id)} />
+        </li>
+      ))
       : products;
+  }
+
+  isItemInCart(id) {
+    return this.props.cartItems.filter(el => el.id === id).length;
   }
 
   onClick(id) {
