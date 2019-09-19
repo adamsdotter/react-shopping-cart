@@ -24,4 +24,9 @@
 
 .toggle-cart__icon {
   @include set-type(berlin);
+  display: inline-block;
+
+  &.animate {
+    @include bounce();
+  }
 }
