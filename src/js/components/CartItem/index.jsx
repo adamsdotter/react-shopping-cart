@@ -19,7 +19,7 @@ class CartItem extends React.Component {
     const { item } = props;
 
     this.state = {
-      count: item.quantity,
+      count: item.quantity || 1,
       price: item.prices[0].amount || 0
     };
 
@@ -32,7 +32,13 @@ class CartItem extends React.Component {
 
   modify(type) {
     const { count } = this.state;
-    const quantity = type === 'increase' ? count + 1 : count - 1;
+    const isDecrease = type === 'decrease';
+
+    if (isDecrease && count === 1) {
+      return;
+    }
+
+    const quantity = isDecrease ? count - 1 : count + 1;
 
     this.props.modifyItem({ id: this.id, type, quantity });
 
