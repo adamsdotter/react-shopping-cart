@@ -10,7 +10,7 @@ const modifyItem = ({ dispatch }) => next => action => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          quantity: action.payload.quantity
+          quantity: 1//action.payload.quantity
         })
       })
       .then(
@@ -25,8 +25,8 @@ const modifyItem = ({ dispatch }) => next => action => {
 
         dispatch({ type, payload: {
           sumTotal: cart.summery[0].amount,
-          count: cart.items.lenght,
-          item: cart.items[0] // todo: needed?
+          count: cart.items.lenght
+          // item: cart.items[0] // todo: needed?
         }});
       })
   }

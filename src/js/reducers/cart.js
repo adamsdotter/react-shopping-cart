@@ -36,14 +36,10 @@ export default function cart(state = initialState, action) {
       };
 
     case ITEM_INCREMENTED:
-      // console.log('increment!', action.payload.item);
-      //
-
       return {
         ...state,
-        count: state.count + 1, //action.payload.item, // allItemsCount,
+        count: state.count + 1,
         sumTotal: state.sumTotal + action.payload.sumTotal
-        // items: allItems
       };
 
     case ITEM_DECREMENTED:
