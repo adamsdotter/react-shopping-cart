@@ -13,7 +13,9 @@ const Product = ({ item, onClick, inCart }) => {
       <img src={imgSrc} alt="" />
       <h3>{title}</h3>
       <p className="product__price">{price}</p>
-      <button disabled={inCart} onClick={()=>onClick(item.id)}><span>Add to cart</span></button>
+      <button disabled={inCart} onClick={()=>onClick(item.id)}>
+        <span>Add to cart</span>
+      </button>
     </div>
   );
 };
