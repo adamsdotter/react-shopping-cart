@@ -2,17 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CartItem from '../CartItem/';
 
-const getItem = (product) => {
-  if (!product) {
-    return null;
-  }
-
-  const item = product.items[0].product;
-
-  return <CartItem key={item.id} item={item} />;
+const getItem = (item) => {
+  // console.log('item =>>>>>', item);
+  return <CartItem key={item.id} item={item} />
 };
 
 const CartOverview = ({ items }) => {
+  // console.log('ITEMS', items);
   return (
     <div className="cart-overview">
       <h1>ALL PRODUCTS</h1>

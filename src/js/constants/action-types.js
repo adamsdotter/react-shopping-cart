@@ -1,5 +1,8 @@
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const ADDED_TO_CART = 'ADDED_TO_CART';
+export const ADD_ITEM = 'ADD_ITEM';
+export const ITEM_ADDED = 'ITEM_ADDED';
+
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const ITEM_REMOVED = 'ITEM_REMOVED';
 
 export const MODIFY_ITEM = 'MODIFY_ITEM';
 export const ITEM_INCREMENTED = 'ITEM_INCREMENTED';

@@ -25,7 +25,8 @@ const modifyItem = ({ dispatch }) => next => action => {
 
         dispatch({ type, payload: {
           sumTotal: cart.summery[0].amount,
-          count: cart.items.lenght
+          count: cart.items.lenght,
+          item: cart.items[0] // todo: needed?
         }});
       })
   }
