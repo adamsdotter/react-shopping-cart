@@ -6,7 +6,7 @@ import './product.scss';
 const Product = ({ item, onClick, inCart }) => {
   const { title, prices, imageUrl } = item;
   const imgSrc = `${HOST}${imageUrl}`;
-  const price = prices[0] ? `${prices[0].amount} ${prices[0].currency}` : null;
+  const price = prices[0] ? `${Math.round(prices[0].amount)} ${prices[0].currency}` : null;
 
   return (
     <div className="product">

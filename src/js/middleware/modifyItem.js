@@ -23,8 +23,22 @@ const modifyItem = ({ dispatch }) => next => action => {
         const type = action.payload.type === 'decrease' ? ITEM_DECREMENTED : ITEM_INCREMENTED;
         console.log(type,' cart>>>>>', cart);
 
+        // const item = cart.items[0];
+        // const price = Math.round(item.product.prices[0].amount);
+        //
+        // const product = {
+        //   id: item.product.id,
+        //   title: item.product.title,
+        //   imageUrl: item.product.imageUrl,
+        //   quantity: item.quantity,
+        //   price,
+        //   totalPrice: item.quantity * price
+        // };
+
+        // dispatch({ type, payload: product});
+
         dispatch({ type, payload: {
-          sumTotal: cart.summery[0].amount,
+          sumTotal: Math.round(cart.summery[0].amount),
           count: cart.items.lenght
           // item: cart.items[0] // todo: needed?
         }});

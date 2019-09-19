@@ -20,11 +20,11 @@ class CartItem extends React.Component {
 
     this.state = {
       count: item.quantity || 1,
-      price: item.prices[0].amount || 0
+      price: item.price || 0
     };
 
     this.id = item.id;
-    this.basePrice = item.prices[0].amount;
+    this.basePrice = item.price;
 
     this.modify = this.modify.bind(this);
     this.remove = this.remove.bind(this);
