@@ -45,10 +45,11 @@ $sizes: (
 $font-primary: 'Helvetica Neue', sans-serif;
 
 // Layout
-$max-width: 1140px;
+$max-width: 1024px;
 
 // Breakboints
 $mq-breakpoints: (
-  'medium':  768px,
-  'large':  $max-width
+  'medium': 568px,
+  'large': 768px,
+  'xlarge': $max-width
 );

@@ -3,14 +3,32 @@
 .products {
   clear: both;
   text-align: center;
+  max-width: $max-width;
+
+  @include mq('large') {
+    margin: 0 auto;
+  }
 }
 
 .product-list {
   margin: 0 auto;
   list-style-type: none;
-  padding: 1rem 2rem 2rem;
+  padding: rhythm('small') rhythm('medium') rhythm('medium');
 
   @include mq('medium') {
-    dislpay: flex;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: rhythm('double');
+    padding-left: rhythm('double');
+  }
+
+  li {
+    @include mq('medium') {
+      width: 50%;
+    }
+
+    @include mq('large') {
+      width: 33%;
+    }
   }
 }
