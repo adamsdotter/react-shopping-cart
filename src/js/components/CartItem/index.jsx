@@ -52,10 +52,8 @@ class CartItem extends React.Component {
   render() {
     const { title, imageUrl } = this.props.item;
     const { count, price } = this.state;
-
     const imgSrc = `${HOST}${imageUrl}`;
-    // console.log('this.props.item', this.props.item);
-    // console.log('this.props.item', this.props);
+
     return (
       <div className="cart-item">
         <h4>{title}</h4>

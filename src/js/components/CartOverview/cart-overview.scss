@@ -1,4 +1,22 @@
 .cart-overview {
   clear: both;
   background-color: white;
+
+  ul {
+    list-style-type: none;
+    padding: 0 2rem;
+  }
+}
+
+.empty-cart {
+  text-transform: none;
+  padding: 1.5rem 2rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+
+  span {
+    font-size: 24px;
+    padding-left: 0.5rem;
+  }
 }
