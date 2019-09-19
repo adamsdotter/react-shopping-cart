@@ -6,12 +6,22 @@
   align-items: center;
   padding: rhythm('xsmall');
 
+  @include mq('large') {
+    padding-right: rhythm();
+    padding-left: rhythm();
+  }
+
   img {
     max-width: 2.5rem;
-    padding-right: rhythm('xsmall');
+    margin-right: rhythm('xsmall');
 
     @include mq('medium') {
       max-width: rhythm('large');
+    }
+
+    @include mq('large') {
+      max-width: rhythm(8);
+      margin-right: rhythm();
     }
   }
 
@@ -20,13 +30,27 @@
 
     margin: 0;
     width: 9rem;
+
+    @include mq('medium') {
+      width: 19rem;
+    }
+
+    @include mq('large') {
+      @include set-type(paris);
+    }
   }
 }
 
 .cart-item__edit {
   display: flex;
-  width: 5rem;
+  width: 7rem;
   align-items: center;
+  justify-content: flex-end;
+
+  @include mq('medium') {
+    width: auto;
+    margin-left: rhythm('double');
+  }
 }
 
 .cart-item__price {
@@ -42,9 +66,17 @@
 .cart-item__remove {
   @include set-type(paris, 'small');
 
-  margin-left: rhythm();
+  margin-left: rhythm('xsmall');
   border: 0;
   padding: 0;
+
+  @include mq('medium') {
+    margin-left: rhythm('double');
+  }
+
+  @include mq('large') {
+    @include set-type(london);
+  }
 }
 
 .cart-item__modify {
@@ -53,13 +85,5 @@
 
   .icon {
     @include set-type(paris);
-  }
-}
-
-.cart-item__currency {
-  @include visuallyhidden;
-
-  @include mq('medium') {
-    @include show-visuallyhidden;
   }
 }
