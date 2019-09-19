@@ -27,6 +27,8 @@
   }
 
   li {
+    transition: all ease 200ms;
+
     @include mq('medium') {
       width: 50%;
     }
