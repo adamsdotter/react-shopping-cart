@@ -18,25 +18,47 @@ class Cart extends React.Component {
       super();
 
       this.state = {
-        expanded: true
+        expanded: true,
+        animateIcon: false
       };
 
       this.toggleViewCart = this.toggleViewCart.bind(this);
+      this.timer = null;
     }
 
     toggleViewCart() {
       this.setState({ expanded: !this.state.expanded });
     }
 
+    componentDidUpdate(prevProps) {
+      if (prevProps.count < this.props.count) {
+        this.setState({ animateIcon: true });
+
+        this.timer = setTimeout(() => {
+          this.setState({ animateIcon: false });
+        }, 500);
+      }
+    }
+
+    componentWillUnmount() {
+      clearTimeout(this.timer);
+    }
+
     render() {
       const { items, count, sumTotal, currency } = this.props;
 
       return (
+        // <div className={`cart ${this.state.expanded ? 'cart--expanded' : 'cart--collapsed'}`}>
         <div className="cart">
           <h1 className="visually-hidden">Avensia's webshop</h1>
           <button className="toggle-cart" onClick={this.toggleViewCart}>
             <span className="toggle-cart__text">View cart</span>
-            <span className="toggle-cart__icon" role="img" aria-hidden>&#128722;</span>
+            <span
+              className={`toggle-cart__icon ${this.state.animateIcon ? 'animate' : ''}`}
+              role="img"
+              aria-hidden>
+              &#128722;
+            </span>
             { count }
           </button>
 
