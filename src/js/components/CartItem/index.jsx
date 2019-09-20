@@ -32,7 +32,7 @@ export default function CartItem({ item }) {
     setPrice(quantity * singlePrice);
   }
 
-  const remove = () => dispatch(removeItem({ id: item.id, count, price }));
+  const remove = () => dispatch(removeItem({ id: item.id, count, price: singlePrice }));
 
 
   return (
