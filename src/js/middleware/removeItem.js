@@ -11,10 +11,8 @@ const removeItem = ({ dispatch }) => next => action => {
             : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
       )
       .then(cart => {
-        console.log('ITEM_REMOVED',' >>>>>', cart);
-
         dispatch({ type: ITEM_REMOVED, payload: {
-          sumTotal: action.payload.price,
+          sumTotal: action.payload.price * action.payload.count,
           count: action.payload.count,
           id: action.payload.id
         }});
@@ -24,16 +22,3 @@ const removeItem = ({ dispatch }) => next => action => {
 };
 
 export default removeItem;
-
-
-// const cart = action.payload.cart;
-// console.log('CART = >', cart);
-//
-// const updatedCart = [];
-// cart.items.forEach((item) => {
-//   if (action.payload.id !== item.items[0].product.id) {
-//     updatedCart.push(item);
-//   }
-// });
-//
-// console.log('New cart:', updatedCart);
