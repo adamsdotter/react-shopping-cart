@@ -11,9 +11,6 @@ export default function CartItem({ item }) {
   const imgSrc = `${HOST}${imageUrl}`;
   const [count, setCount] = useState(item.quantity);
 
-  // TODO
-  // console.log('render CartItem() count', count, item.title);
-
   const modify = (type) => {
     const isDecrease = type === 'decrease';
 
