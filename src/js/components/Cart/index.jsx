@@ -42,7 +42,6 @@ function Cart({ items, count, sumTotal, currency }) {
           clearTimeout(timer)
         }
       }, [count, currentCount]
-
     )
 
   return (
