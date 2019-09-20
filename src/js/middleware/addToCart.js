@@ -12,8 +12,6 @@ const addToCart = ({ dispatch }) => next => action => {
             : Promise.reject(`Cannot communicate with the mocked REST API server (${response.statusText})`),
       )
       .then(cart => {
-        console.log('ADDED ITEM >:', cart.items);
-
         const item = cart.items[0];
         const price = parseInt(Math.round(item.product.prices[0].amount), 10);
         const { id, title, imageUrl, prices } = item.product;

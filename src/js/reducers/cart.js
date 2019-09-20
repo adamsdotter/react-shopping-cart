@@ -1,4 +1,4 @@
-import { ITEM_ADDED, ITEM_REMOVED, ITEM_INCREMENTED, ITEM_DECREMENTED } from '../constants/action-types';
+import { ITEM_ADDED, ITEM_REMOVED, ITEM_MODIFIED } from '../constants/action-types';
 
 const initialState = {
   count: 0,
@@ -7,8 +7,42 @@ const initialState = {
   items: []
 };
 
+const getSumTotal = (items) => {
+  let sum = 0;
+
+  // TODO use reduce
+  items.forEach(item => {
+      sum += item.totalPrice;
+  });
+
+  return sum;
+};
+//
+// const getCount = (items) => {
+//   let sum = 0;
+//   items.forEach(item => {
+//       // console.log('item', item.quantity);
+//       sum += item.quantity;
+//   });
+//
+//   return sum;
+// };
+
+const updateItemList = (items, modifiedItem) => {
+  // TODO mutation
+
+  return items.map(item => {
+    return item.id !== modifiedItem.id ? item : {
+      ...item,
+      quantity: modifiedItem.quantity,
+      totalPrice: modifiedItem.totalPrice
+    }
+  });
+};
+
 export default function cart(state = initialState, action) {
   switch (action.type) {
+
     case ITEM_ADDED:
       return {
         ...state,
@@ -21,6 +55,9 @@ export default function cart(state = initialState, action) {
     case ITEM_REMOVED:
       const clone = { ...state };
 
+      // console.log('ITEMS TO REMOVE', action.payload.count);
+      // console.log('$$ TO REMOVE', action.payload.sumTotal);
+
       return {
         ...state,
         count: parseInt(state.count, 10) - action.payload.count,
@@ -28,18 +65,14 @@ export default function cart(state = initialState, action) {
         items: clone.items.filter(el => el.id !== action.payload.id)
       };
 
-    case ITEM_INCREMENTED:
-      return {
-        ...state,
-        count: state.count + 1,
-        sumTotal: state.sumTotal + action.payload.sumTotal
-      };
+    case ITEM_MODIFIED:
+      const updatedItems = updateItemList(state.items, action.payload.item);
 
-    case ITEM_DECREMENTED:
       return {
         ...state,
-        count: state.count - 1,
-        sumTotal: state.sumTotal - action.payload.sumTotal
+        count: action.payload.type === 'increase' ? state.count + 1 : state.count - 1,
+        sumTotal: getSumTotal(updatedItems),
+        items: updatedItems
       };
 
     default:
