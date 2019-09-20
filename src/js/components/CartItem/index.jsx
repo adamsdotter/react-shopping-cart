@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { modifyItem, removeItem } from '../../actions';
 import { HOST } from '../../constants';
 import './cart-item.scss';
 
-// TODO refactor
-const mapDispatchToProps = dispatch => {
-  return {
-    modifyItem: payload => dispatch(modifyItem(payload)),
-    removeItem: payload => dispatch(removeItem(payload))
-  };
-};
-
-function CartItem({ item, modifyItem, removeItem }) {
+export default function CartItem({ item }) {
+  const dispatch = useDispatch();
   const { title, imageUrl } = item;
   const imgSrc = `${HOST}${imageUrl}`;
   const singlePrice = item.price;
 
   const [count, setCount] = useState(item.quantity);
   const [price, setPrice] = useState(item.price);
+
+  // TODO
+  // console.log('render CartItem() count', count, item.title);
 
 
   const modify = (type) => {
@@ -31,12 +27,12 @@ function CartItem({ item, modifyItem, removeItem }) {
 
     const quantity = isDecrease ? count - 1 : count + 1;
 
-    modifyItem({ id: item.id, type, quantity });
+    dispatch(modifyItem({ id: item.id, type, quantity }));
     setCount(quantity);
     setPrice(quantity * singlePrice);
   }
 
-  const remove = () => removeItem({ id: item.id, count, price });
+  const remove = () => dispatch(removeItem({ id: item.id, count, price }));
 
 
   return (
@@ -68,5 +64,3 @@ function CartItem({ item, modifyItem, removeItem }) {
 CartItem.propTypes = {
   item: PropTypes.object.isRequired
 }
-
-export default connect(null, mapDispatchToProps)(CartItem);
