@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CartOverview from '../CartOverview/'
@@ -13,59 +13,55 @@ const mapStateToProps = state => {
   };
 };
 
-class Cart extends React.Component {
-    constructor() {
-      super();
+function Cart({ items, count, sumTotal, currency }) {
+  const [expanded, setExpanded] = useState(true);
+  const [currentCount, setCurrentCount] = useState(0);
+  const [animateIcon, setAnimateIcon] = useState(false);
 
-      this.state = {
-        expanded: true,
-        animateIcon: false
-      };
-
-      this.toggleViewCart = this.toggleViewCart.bind(this);
-      this.timer = null;
+    const toggleViewCart = () => {
+      const exp = !expanded;
+      setExpanded(exp);
     }
 
-    toggleViewCart() {
-      this.setState({ expanded: !this.state.expanded });
-    }
+    useEffect(
+      () => {
+        let timer = null;
 
-    componentDidUpdate(prevProps) {
-      if (prevProps.count < this.props.count) {
-        this.setState({ animateIcon: true });
+        if (currentCount < count) {
+          setAnimateIcon(true);
+        }
 
-        this.timer = setTimeout(() => {
-          this.setState({ animateIcon: false });
+        setCurrentCount(count);
+
+        timer = setTimeout(() => {
+          setAnimateIcon(false);
         }, 500);
-      }
-    }
 
-    componentWillUnmount() {
-      clearTimeout(this.timer);
-    }
+        return () => {
+          clearTimeout(timer)
+        }
+      }, [count, currentCount]
 
-    render() {
-      const { items, count, sumTotal, currency } = this.props;
+    )
 
-      return (
-        // <div className={`cart ${this.state.expanded ? 'cart--expanded' : 'cart--collapsed'}`}>
-        <div className="cart">
-          <h1 className="visually-hidden">Avensia's webshop</h1>
-          <button className="toggle-cart" onClick={this.toggleViewCart}>
-            <span className="toggle-cart__text">View cart</span>
-            <span
-              className={`toggle-cart__icon ${this.state.animateIcon ? 'animate' : ''}`}
-              role="img"
-              aria-hidden>
-              &#128722;
-            </span>
-            { count }
-          </button>
+  return (
+    // <div className={`cart ${this.state.expanded ? 'cart--expanded' : 'cart--collapsed'}`}>
+    <div className="cart">
+      <h1 className="visually-hidden">Avensia's webshop</h1>
+      <button className="toggle-cart" onClick={toggleViewCart}>
+        <span className="toggle-cart__text">View cart</span>
+        <span
+          className={`toggle-cart__icon ${animateIcon ? 'animate' : ''}`}
+          role="img"
+          aria-hidden>
+          &#128722;
+        </span>
+        { count }
+      </button>
 
-          { this.state.expanded ? <CartOverview items={items} sumTotal={sumTotal} currency={currency} /> : null }
-        </div>
-      );
-    }
+      { expanded ? <CartOverview items={items} sumTotal={sumTotal} currency={currency} /> : null }
+    </div>
+  );
 }
 
 Cart.propTypes = {
