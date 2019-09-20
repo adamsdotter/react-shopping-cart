@@ -8,32 +8,17 @@ const initialState = {
 };
 
 const getSumTotal = (items) => {
-  let sum = 0;
-
-  // TODO use reduce
-  items.forEach(item => {
-      sum += item.totalPrice;
-  });
-
-  return sum;
+  return items.reduce((acc, item) => {
+    return acc += item.totalPrice;
+  }, 0);
 };
-//
-// const getCount = (items) => {
-//   let sum = 0;
-//   items.forEach(item => {
-//       // console.log('item', item.quantity);
-//       sum += item.quantity;
-//   });
-//
-//   return sum;
-// };
 
-const updateItemList = (items, modifiedItem) => {
-  // TODO mutation
+const updateItemList = (elems, modifiedItem) => {
+  const items = {...elems};
 
-  return items.map(item => {
-    return item.id !== modifiedItem.id ? item : {
-      ...item,
+  return Object.keys(items).map(i => {
+    return items[i].id !== modifiedItem.id ? items[i] : {
+      ...items[i],
       quantity: modifiedItem.quantity,
       totalPrice: modifiedItem.totalPrice
     }
@@ -54,9 +39,6 @@ export default function cart(state = initialState, action) {
 
     case ITEM_REMOVED:
       const clone = { ...state };
-
-      // console.log('ITEMS TO REMOVE', action.payload.count);
-      // console.log('$$ TO REMOVE', action.payload.sumTotal);
 
       return {
         ...state,
