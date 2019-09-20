@@ -37,7 +37,6 @@ export default function Cart() {
     )
 
   return (
-    // <div className={`cart ${this.state.expanded ? 'cart--expanded' : 'cart--collapsed'}`}>
     <div className="cart">
       <h1 className="visually-hidden">Avensia's webshop</h1>
       <button className="toggle-cart" onClick={toggleViewCart}>
