@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CartItem from '../CartItem/';
 import './cart-overview.scss';
 
-const CartOverview = ({ items, sumTotal, currency }) => {
+function CartOverview({ items, sumTotal, currency }) {
   return (
     <div className="cart-overview">
       { items.length
@@ -24,5 +24,6 @@ CartOverview.propTypes = {
   sumTotal: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired
 }
+
 
 export default CartOverview;
