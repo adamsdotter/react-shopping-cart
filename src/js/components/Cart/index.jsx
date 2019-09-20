@@ -7,7 +7,7 @@ export default function Cart() {
   const cart = useSelector(state => state.cart);
   const { count, items, sumTotal, currency } = cart;
 
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const [currentCount, setCurrentCount] = useState(0);
   const [animateIcon, setAnimateIcon] = useState(false);
 

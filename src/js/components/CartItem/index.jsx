@@ -9,14 +9,10 @@ export default function CartItem({ item }) {
   const dispatch = useDispatch();
   const { title, imageUrl } = item;
   const imgSrc = `${HOST}${imageUrl}`;
-  const singlePrice = item.price;
-
   const [count, setCount] = useState(item.quantity);
-  const [price, setPrice] = useState(item.price);
 
   // TODO
   // console.log('render CartItem() count', count, item.title);
-
 
   const modify = (type) => {
     const isDecrease = type === 'decrease';
@@ -29,10 +25,9 @@ export default function CartItem({ item }) {
 
     dispatch(modifyItem({ id: item.id, type, quantity }));
     setCount(quantity);
-    setPrice(quantity * singlePrice);
   }
 
-  const remove = () => dispatch(removeItem({ id: item.id, count, price: singlePrice }));
+  const remove = () => dispatch(removeItem({ id: item.id, count, price: item.price }));
 
 
   return (
@@ -40,7 +35,7 @@ export default function CartItem({ item }) {
       <img src={imgSrc} alt="" />
       <h4>{title}</h4>
 
-      <p className="cart-item__price">{price}</p>
+      <p className="cart-item__price">{item.totalPrice}</p>
 
       <div className="cart-item__edit">
         <button className="cart-item__modify" onClick={() => modify('decrease')}>
