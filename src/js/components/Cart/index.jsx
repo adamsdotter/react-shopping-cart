@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CartOverview from '../CartOverview/'
 import './cart.scss';
 
+// TODO REFACTOR
 const mapStateToProps = state => {
   return {
     count: state.cart.count,

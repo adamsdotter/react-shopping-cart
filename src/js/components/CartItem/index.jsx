@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { modifyItem, removeItem } from '../../actions';
 import { HOST } from '../../constants';
 import './cart-item.scss';
 
+// TODO refactor
 const mapDispatchToProps = dispatch => {
   return {
     modifyItem: payload => dispatch(modifyItem(payload)),
@@ -12,26 +13,16 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-class CartItem extends React.Component {
-  constructor(props) {
-    super(props);
+function CartItem({ item, modifyItem, removeItem }) {
+  const { title, imageUrl } = item;
+  const imgSrc = `${HOST}${imageUrl}`;
+  const singlePrice = item.price;
 
-    const { item } = props;
+  const [count, setCount] = useState(item.quantity);
+  const [price, setPrice] = useState(item.price);
 
-    this.state = {
-      count: item.quantity || 1,
-      price: item.price || 0
-    };
 
-    this.id = item.id;
-    this.basePrice = item.price;
-
-    this.modify = this.modify.bind(this);
-    this.remove = this.remove.bind(this);
-  }
-
-  modify(type) {
-    const { count } = this.state;
+  const modify = (type) => {
     const isDecrease = type === 'decrease';
 
     if (isDecrease && count === 1) {
@@ -40,50 +31,38 @@ class CartItem extends React.Component {
 
     const quantity = isDecrease ? count - 1 : count + 1;
 
-    this.props.modifyItem({ id: this.id, type, quantity });
-
-    this.setState({
-      count: quantity,
-      price: quantity * this.basePrice
-    });
+    modifyItem({ id: item.id, type, quantity });
+    setCount(quantity);
+    setPrice(quantity * singlePrice);
   }
 
-  remove() {
-    const { count, price } = this.state;
+  const remove = () => removeItem({ id: item.id, count, price });
 
-    this.props.removeItem({ id: this.id, count, price });
-  }
 
-  render() {
-    const { title, imageUrl } = this.props.item;
-    const { count, price } = this.state;
-    const imgSrc = `${HOST}${imageUrl}`;
+  return (
+    <div className="cart-item">
+      <img src={imgSrc} alt="" />
+      <h4>{title}</h4>
 
-    return (
-      <div className="cart-item">
-        <img src={imgSrc} alt="" />
-        <h4>{title}</h4>
+      <p className="cart-item__price">{price}</p>
 
-        <p className="cart-item__price">{price}</p>
-
-        <div className="cart-item__edit">
-          <button className="cart-item__modify" onClick={() => this.modify('decrease')}>
-            <span className="visually-hidden">Decrease</span>
-            <span className="icon-dec" aria-hidden>&#10134;</span>
-          </button>
-          <p className="cart-item__count">{count}</p>
-          <button className="cart-item__modify" onClick={() => this.modify('increase')}>
-            <span className="visually-hidden">Increase</span>
-            <span className="icon-inc" aria-hidden>&#10133;</span>
-          </button>
-          <button className="cart-item__remove" onClick={this.remove}>
-            <span className="visually-hidden">Remove item</span>
-            <span className="icon-rem" aria-hidden>&#128465;</span>
-          </button>
-        </div>
+      <div className="cart-item__edit">
+        <button className="cart-item__modify" onClick={() => modify('decrease')}>
+          <span className="visually-hidden">Decrease</span>
+          <span className="icon-dec" aria-hidden>&#10134;</span>
+        </button>
+        <p className="cart-item__count">{count}</p>
+        <button className="cart-item__modify" onClick={() => modify('increase')}>
+          <span className="visually-hidden">Increase</span>
+          <span className="icon-inc" aria-hidden>&#10133;</span>
+        </button>
+        <button className="cart-item__remove" onClick={remove}>
+          <span className="visually-hidden">Remove item</span>
+          <span className="icon-rem" aria-hidden>&#128465;</span>
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 CartItem.propTypes = {
