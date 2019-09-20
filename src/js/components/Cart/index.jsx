@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CartOverview from '../CartOverview/'
 import './cart.scss';
 
-// TODO REFACTOR
-const mapStateToProps = state => {
-  return {
-    count: state.cart.count,
-    items: state.cart.items,
-    sumTotal: state.cart.sumTotal,
-    currency: state.cart.currency
-  };
-};
+export default function Cart() {
+  const cart = useSelector(state => state.cart);
+  const { count, items, sumTotal, currency } = cart;
 
-function Cart({ items, count, sumTotal, currency }) {
   const [expanded, setExpanded] = useState(true);
   const [currentCount, setCurrentCount] = useState(0);
   const [animateIcon, setAnimateIcon] = useState(false);
@@ -63,12 +55,3 @@ function Cart({ items, count, sumTotal, currency }) {
     </div>
   );
 }
-
-Cart.propTypes = {
-  count: PropTypes.number.isRequired,
-  items: PropTypes.array.isRequired,
-  sumTotal: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired
-}
-
-export default connect(mapStateToProps)(Cart);
