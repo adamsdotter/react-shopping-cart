@@ -15,7 +15,7 @@
     "avensia-api-sample-server": "https://github.com/avensia/api-sample-server",
     "eslint": "^6.3.0",
     "eslint-plugin-react-app": "^6.0.2",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
     "parcel-bundler": "^1.6.2",
     "parcel-plugin-eslint": "^1.0.7",
     "prettier": "1.11.1",
